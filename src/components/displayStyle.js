@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
+import Scroller from "./scroller";
 
 const Container = styled.div`
   &.style_wrapper {
@@ -15,6 +16,7 @@ const Container = styled.div`
     text-align: center;
     background: #f2f3f8;
     border-radius: 10px;
+    cursor: pointer;
   }
 
   &.style_content {
@@ -32,23 +34,52 @@ const Text = styled.h4`
 `;
 
 const DisplayStyle = (props) => {
+  useEffect(() => {
+    const style_wrapper = document.getElementById(`${props.id}`);
+    style_wrapper.addEventListener("scroll", (event) => {
+      const device_width =
+        document.documentElement.clientWidth || window.innerWidth;
+      const leftOffset = event.currentTarget.scrollLeft;
+
+      if (leftOffset > device_width / 5) {
+        document
+          .getElementById(`${props.id_primary}`)
+          .classList.remove("active");
+        document
+          .getElementById(`${props.id_secondary}`)
+          .classList.add("active");
+      } else if (leftOffset < device_width / 5) {
+        document
+          .getElementById(`${props.id_secondary}`)
+          .classList.remove("active");
+        document.getElementById(`${props.id_primary}`).classList.add("active");
+      }
+    });
+  });
+
   return (
-    <Container className="style_wrapper">
-      {props.array.map((item) => {
-        return (
-          <Container className="style">
-            <Container className="style_content">
-              <Container className="image">
-                <Image src={item.style} />
-              </Container>
-              <Container className="text">
-                <Text>{item.name}</Text>
+    <>
+      <Container className="style_wrapper" id={props.id}>
+        {props.array.map((item, index) => {
+          return (
+            <Container className="style" key={index}>
+              <Container className="style_content">
+                <Container className="image">
+                  <Image src={item.style} loading="eager" />
+                </Container>
+                <Container className="text">
+                  <Text>{item.name}</Text>
+                </Container>
               </Container>
             </Container>
-          </Container>
-        );
-      })}
-    </Container>
+          );
+        })}
+      </Container>
+      <Scroller
+        id_primary={props.id_primary}
+        id_secondary={props.id_secondary}
+      />
+    </>
   );
 };
 

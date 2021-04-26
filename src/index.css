@@ -17,11 +17,12 @@ code {
 :root {
   --color-text-grey: #7a8387;
   --color-text-light: #ffffff;
+  --color-text: #232f34;
+  --color-text-secondary: #50576A;
   --color-darkBg: #232f34;
   --color-lightBg: rgba(242, 243, 248, 0.9);
   --color-lightBg2: #F7FAFF;
-  --color-text: #232f34;
-  --color-text-secondary: #50576A;
+  --color-border: #EAEDF5;
   --color-footerBg: #38ACED;
   --color-stylesBg: #F2F3F8;
   --font-body: "Noto Sans JP", sans-serif;
