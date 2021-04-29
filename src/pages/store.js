@@ -76,7 +76,10 @@ const Container = styled.div`
 
   &.image_fabric {
     display: flex;
-    gap: 0.7em;
+  }
+
+  &.image_fabric_inner {
+    margin-right: 0.5em;
   }
 
   &.wrapper {
@@ -238,7 +241,7 @@ const Store = () => {
                 <>
                   {image_path.map((image, index) => {
                     return (
-                      <Container key={index}>
+                      <Container key={index} className="image_fabric_inner">
                         <Image src={image} loading="eager" />
                       </Container>
                     );
