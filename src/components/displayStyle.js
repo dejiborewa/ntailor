@@ -6,7 +6,6 @@ const Container = styled.div`
   &.style_wrapper {
     display: flex;
     overflow-x: auto;
-    
   }
 
   &.style {
@@ -25,7 +24,6 @@ const Container = styled.div`
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    
   }
 `;
 

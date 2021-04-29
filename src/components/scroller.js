@@ -7,6 +7,7 @@ const Container = styled.div`
   height: ${(props) => (props.dot ? ".5em" : "")};
   border-radius: ${(props) => (props.dot ? "50%" : "")};
   background: ${(props) => (props.dot ? "#ccc" : "")};
+  margin-right: ${(props) => (props.dot ? "0.3em" : "")};
 
   &.active {
     background: var(--color-footerBg);
@@ -14,12 +15,11 @@ const Container = styled.div`
 
   @media (min-width: 452px) {
     display: none;
-  } 
+  }
 `;
 
 const DotWrapper = styled(Container)`
   margin: 0.5em auto 0;
-  gap: 0.5em;
 `;
 
 const Scroller = (props) => {
