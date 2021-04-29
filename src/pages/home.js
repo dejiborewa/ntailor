@@ -3,6 +3,7 @@ import styled from "styled-components";
 import Nav from "../components/nav";
 import Footer from "../components/footer";
 import couples_wide from "./assets/home/couples_wide.jpeg";
+import couples_narrow from "./assets/home/couples_narrow.jpg";
 import { Link } from "react-router-dom";
 
 const Container = styled.div`
@@ -94,7 +95,7 @@ const Text = styled.p`
 const ImageContainer = styled(Container)`
   position: relative;
   background-image: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.6)),
-    url(${couples_wide});
+    url(${couples_narrow});
   background-size: cover;
   width: 100%;
   height: 50vh;
@@ -147,11 +148,9 @@ const Home = () => {
           and gracing us with your presence. #HappilyEverAyansola.
         </Text>
       </Container>
-      <>
-        <Link to="/store" style={{ textDecoration: "none" }}>
-          <Footer text="GO TO STORE" />
-        </Link>
-      </>
+      <Link to="/store" style={{ textDecoration: "none" }}>
+        <Footer text="GO TO STORE" />
+      </Link>
     </Container>
   );
 };

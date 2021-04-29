@@ -1,12 +1,13 @@
 // Dependencies
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 
 // Components
 import Nav from "../components/nav";
 import Footer from "../components/footer";
-import BackButton from "../components/backbutton";
 import DisplayStyle from "../components/displayStyle";
+import BackAndTotal from "../components/backAndTotal";
+import Section from "../components/section";
 
 // Assets
 import buba from "./assets/store/buba.jpeg";
@@ -18,7 +19,7 @@ import abetiAja from "../components/assets/displayStyle/abetiaja.png";
 import awolowo from "../components/assets/displayStyle/awolowo.png";
 import gobi from "../components/assets/displayStyle/gobi.png";
 
-// React router
+// Recat router DOM
 import { Link } from "react-router-dom";
 
 // Data
@@ -57,15 +58,15 @@ const capStyleData = [
 const list = [
   {
     title: "SELECT GROUP",
-    link: "group",
+    link: "group_wrapper",
   },
   {
     title: "SHOP FABRIC",
-    link: "fabric",
+    link: "fabric_wrapper",
   },
   {
     title: "STYLE OUTFIT",
-    link: "outfit",
+    link: "outfit_wrapper",
   },
 ];
 
@@ -76,13 +77,6 @@ const Container = styled.div`
   &.image_fabric {
     display: flex;
     gap: 0.7em;
-  }
-
-  &.back {
-    display: flex;
-    justify-content: space-between;
-    padding: 1em 0;
-    align-items: center;
   }
 
   &.wrapper {
@@ -111,19 +105,18 @@ const Container = styled.div`
       display: block;
       width: 20%;
       background: var(--color-stylesBg);
-      padding-top: 1.5em;
     }
 
     &.right {
       width: 80%;
-      padding: 1.5em;
     }
   }
 `;
 
-const Text = styled.h4`
+export const Text = styled.h4`
   font-weight: lighter;
   margin: 0.8em 0;
+  color: var(--color-text-secondary);
 `;
 
 const Input = styled.input`
@@ -161,30 +154,67 @@ const List = styled.ul`
 
 const ListItems = styled.li`
   list-style-type: none;
-  margin-bottom: 0.3em;
+  margin-bottom: 0.35em;
   border-left: 2px solid var(--color-border);
   color: var(--color-text-secondary);
   padding-left: 0.4em;
+  cursor: pointer;
+
+  &.focus {
+    color: var(--color-darkBg);
+    font-weight: bold;
+    border-color: var(--color-darkBg);
+  }
 `;
 
 const Anchor = styled.a`
-  color: inherit;
   text-decoration: none;
+  color: inherit;
 `;
 
 const Store = () => {
-  const [fabricSelection, setFabricSelection] = useState(false);
+  const [width, setWidth] = useState(
+    document.documentElement.clientWidth || window.innerWidth
+  );
+
+  useEffect(() => {
+    const checkSize = () => {
+      setWidth(document.documentElement.clientWidth || window.innerWidth);
+    };
+    window.addEventListener("resize", checkSize);
+  }, []);
+
+  useEffect(() => {
+    const listItems = document.getElementsByClassName("list_links");
+    listItems[0].classList.add("focus");
+  }, []);
+
+  /*const handleClick = () => {
+    const listItems = document.getElementsByClassName("list_links");
+    document.getElementById("list_links").addEventListener("click", (event) => {
+      event.preventDefault();
+      for (let i = 0; i < listItems.length; i++) {
+        listItems[i].classList.remove("focus");
+      }
+      event.target.classList.add("focus");
+    });
+  }  
+  */
 
   return (
     <Container>
       <Nav />
       <Container className="main">
         <Container className="left">
-          <List>
+          <List id="list_links">
             {list.map((listItems, index) => {
               return (
-                <ListItems key={index}>
-                  <Anchor href={listItems.link}>{listItems.title}</Anchor>
+                <ListItems
+                  href="#fabric_wrapper"
+                  key={index}
+                  className="list_links"
+                >
+                  <Anchor href={`#${listItems.link}`}>{listItems.title}</Anchor>
                 </ListItems>
               );
             })}
@@ -192,26 +222,23 @@ const Store = () => {
         </Container>
         <Container className="right">
           <Container className="wrapper">
-            <Container className="back">
-              <Link to="/">
-                <BackButton>Back</BackButton>
-              </Link>
-              <Container>TOTAL: $45.00</Container>
-            </Container>
-            <Container className="guest">
-              <Text>AVAILABLE GROUP</Text>
+            <BackAndTotal location="/" />
+            <Container className="guest" id="group_wrappper">
+              {width >= 1024 ? (
+                <Section title="AVAILABLE GROUP" />
+              ) : (
+                <Text>AVAILABLE GROUP</Text>
+              )}
               <Input type="text" placeholder="Male Guest" />
             </Container>
-            <Container>
+            <Container id="fabric_wrapper">
+              {width >= 1024 ? <Section title="SHOP FABRIC" /> : <></>}
               <Text>CHOOSE A FABRIC</Text>
               <Container className="image_fabric" id="fabric">
                 <>
                   {image_path.map((image, index) => {
                     return (
-                      <Container
-                        onClick={() => setFabricSelection(!fabricSelection)}
-                        key={index}
-                      >
+                      <Container key={index}>
                         <Image src={image} loading="eager" />
                       </Container>
                     );
@@ -219,28 +246,33 @@ const Store = () => {
                 </>
               </Container>
             </Container>
-            <Container to="/fabric">
-              <Text>CHOOSE A STYLE</Text>
-              <DisplayStyle
-                array={styleData}
-                id="styles"
-                id_primary="styles_primary"
-                id_secondary="styles_secondary"
-              />
-            </Container>
-            <Container>
-              <Text>SELECT CAP STYLE</Text>
-              <DisplayStyle
-                array={capStyleData}
-                id="caps"
-                id_primary="caps_primary"
-                id_secondary="caps_secondary"
-              />
+            <Container id="outfit_wrapper">
+              {width >= 1024 ? <Section title="STYLE OUTFIT" /> : <></>}
+              <Container>
+                <Text>CHOOSE A STYLE</Text>
+                <DisplayStyle
+                  array={styleData}
+                  id="styles"
+                  id_primary="styles_primary"
+                  id_secondary="styles_secondary"
+                />
+              </Container>
+              <Container>
+                <Text>SELECT CAP STYLE</Text>
+                <DisplayStyle
+                  array={capStyleData}
+                  id="caps"
+                  id_primary="caps_primary"
+                  id_secondary="caps_secondary"
+                />
+              </Container>
             </Container>
           </Container>
         </Container>
       </Container>
-      <Footer text="NEXT" />
+      <Link to="/upload" style={{ textDecoration: "none" }}>
+        <Footer text="NEXT" />
+      </Link>
     </Container>
   );
 };
