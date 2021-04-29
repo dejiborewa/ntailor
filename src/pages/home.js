@@ -77,7 +77,7 @@ const Text = styled.p`
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    margin: 1.2em 0 0;
+    margin: 0;
     padding: 0;
     color: var(--color-text-light);
     font-weight: bold;
@@ -98,7 +98,7 @@ const ImageContainer = styled(Container)`
     url(${couples_narrow});
   background-size: cover;
   width: 100%;
-  height: 50vh;
+  height: 65vh;
 
   @media (min-width: 768px) {
     background-image: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.6)),

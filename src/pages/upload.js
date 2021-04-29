@@ -138,7 +138,7 @@ const Upload = () => {
           <Container>
             <TextArea
               type="text"
-              placeholder="I would like a Cufflink at the wrist: I would love a pant waist instead of Elastic with rope for me sokoto e.t.c"
+          
             ></TextArea>
           </Container>
         </Container>

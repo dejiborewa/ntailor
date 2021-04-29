@@ -6,7 +6,7 @@ const Container = styled.div`
   &.style_wrapper {
     display: flex;
     overflow-x: auto;
-    gap: 0.5em;
+    
   }
 
   &.style {
@@ -14,6 +14,7 @@ const Container = styled.div`
     min-width: 10.3em;
     min-height: 10.3em;
     text-align: center;
+    margin-right: 0.5em;
     background: #f2f3f8;
     border-radius: 10px;
     cursor: pointer;
@@ -24,6 +25,7 @@ const Container = styled.div`
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    
   }
 `;
 
