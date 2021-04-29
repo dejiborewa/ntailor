@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import Nav from "../components/nav";
 import BackAndTotal from "../components/backAndTotal";
 import Footer from "../components/footer";
 import add from "./assets/upload/add.png";
@@ -111,42 +112,42 @@ const TextArea = styled.textarea`
 
 const Upload = () => {
   return (
-    <Container>
-      <Container className="wrapper">
-        <BackAndTotal location="/store" />
-        <Container>
-          <Text>UPLOAD DESIGN INSPIRATION</Text>
-          <UploadContainer>
-            <Container className="upload">
-              <Container className="upload_logo">
-                <Container className="upload_logo_inner">
-                  <Image src={add} alt="add_image" />
+    <>
+      <Nav />
+      <Container>
+        <Container className="wrapper">
+          <BackAndTotal location="/store" />
+          <Container>
+            <Text>UPLOAD DESIGN INSPIRATION</Text>
+            <UploadContainer>
+              <Container className="upload">
+                <Container className="upload_logo">
+                  <Container className="upload_logo_inner">
+                    <Image src={add} alt="add_image" />
+                  </Container>
+                </Container>
+                <Container className="upload_text">
+                  <Heading>Upload photos</Heading>
+                  <Paragraph>
+                    Upload an image of a native style you’d like us to
+                    replicate, your image must be in .JPG or .PNG format
+                  </Paragraph>
                 </Container>
               </Container>
-              <Container className="upload_text">
-                <Heading>Upload photos</Heading>
-                <Paragraph>
-                  Upload an image of a native style you’d like us to replicate,
-                  your image must be in .JPG or .PNG format
-                </Paragraph>
-              </Container>
+            </UploadContainer>
+          </Container>
+          <Container className="requests">
+            <Text>Any additional styling requests?</Text>
+            <Container>
+              <TextArea type="text"></TextArea>
             </Container>
-          </UploadContainer>
-        </Container>
-        <Container className="requests">
-          <Text>Any additional styling requests?</Text>
-          <Container>
-            <TextArea
-              type="text"
-          
-            ></TextArea>
           </Container>
         </Container>
+        <Link to="" style={{ textDecoration: "none" }}>
+          <Footer text="UPLOAD" />
+        </Link>
       </Container>
-      <Link to="" style={{ textDecoration: "none" }}>
-        <Footer text="UPLOAD" />
-      </Link>
-    </Container>
+    </>
   );
 };
 
