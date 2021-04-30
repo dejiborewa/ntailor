@@ -102,16 +102,19 @@ const Container = styled.div`
   @media (min-width: 1024px) {
     &.main {
       display: flex;
+      height: 90vh;
     }
 
     &.left {
       display: block;
       width: 20%;
       background: var(--color-stylesBg);
+      height: 100vh;
     }
 
     &.right {
       width: 80%;
+      overflow-y: scroll;
     }
   }
 `;
@@ -271,11 +274,11 @@ const Store = () => {
               </Container>
             </Container>
           </Container>
+          <Link to="/upload" style={{ textDecoration: "none" }}>
+            <Footer text="NEXT" />
+          </Link>
         </Container>
       </Container>
-      <Link to="/upload" style={{ textDecoration: "none" }}>
-        <Footer text="NEXT" />
-      </Link>
     </Container>
   );
 };

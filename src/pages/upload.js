@@ -48,6 +48,12 @@ const Container = styled.div`
     margin: 1.5em 0;
   }
 
+  &.add_image_container {
+    width: 2em;
+    height: 2em;
+    margin: 0.3em auto 0;
+  }
+
   @media (min-width: 768px) {
     font-size: 19px;
 
@@ -65,7 +71,6 @@ const Container = styled.div`
   }
 
   @media (min-width: 1024px) {
-    padding: 0 0.5em;
     font-size: 22px;
 
     &.requests {
@@ -90,7 +95,10 @@ const UploadContainer = styled(Container)`
   }
 `;
 
-const Image = styled.img``;
+const Image = styled.img`
+  width: 2em;
+  margin: 0 auto;
+`;
 
 const Heading = styled.h3`
   margin: 0;
@@ -118,12 +126,14 @@ const Upload = () => {
         <Container className="wrapper">
           <BackAndTotal location="/store" />
           <Container>
-            <Text>UPLOAD DESIGN INSPIRATION</Text>
+            <Text style={{ marginTop: 0 }}>UPLOAD DESIGN INSPIRATION</Text>
             <UploadContainer>
               <Container className="upload">
                 <Container className="upload_logo">
                   <Container className="upload_logo_inner">
-                    <Image src={add} alt="add_image" />
+                    <Container className="add_image_container">
+                      <Image src={add} alt="add_image" />
+                    </Container>
                   </Container>
                 </Container>
                 <Container className="upload_text">
@@ -143,7 +153,7 @@ const Upload = () => {
             </Container>
           </Container>
         </Container>
-        <Link to="" style={{ textDecoration: "none" }}>
+        <Link to="/form" style={{ textDecoration: "none" }}>
           <Footer text="UPLOAD" />
         </Link>
       </Container>

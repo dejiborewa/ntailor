@@ -16,6 +16,7 @@ const Container = styled.div`
 const Button = styled.button`
   background: var(--color-darkBg);
   border: 0;
+  outline: none;
   border-radius: 37px;
   color: white;
   padding: 0.6em 1.4em;

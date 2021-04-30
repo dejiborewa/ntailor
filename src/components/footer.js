@@ -8,6 +8,7 @@ const Container = styled.div`
   padding: 1em 0;
 
   @media (min-width: 768px) {
+    width: 95%;
     display: flex;
     justify-content: flex-end;
     background: white;
@@ -19,9 +20,10 @@ const Button = styled.button`
   color: var(--color-text-light);
   border-radius: 8px;
   cursor: pointer;
-  padding: 1em 2em;
+  width: 10.5em;
+  padding: 1em;
   outline: none;
-  border: 0;
+  border: none;
 `;
 
 const Footer = (props) => {
