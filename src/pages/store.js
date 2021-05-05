@@ -197,6 +197,7 @@ const Select = styled.select`
 
 const Option = styled.option`
   font-family: inherit;
+  width: inherit;
 `;
 
 const Dropdown = () => {

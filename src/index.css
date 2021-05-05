@@ -1,8 +1,14 @@
 body {
-  margin: 0 0 1.5em 0;
+  margin: 0;
   font-family: var(--font-body);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+@media only screen and (min-width: 768px) {
+  body {
+    margin: 0 0 1.5em 0;
+  }
 }
 
 code {
