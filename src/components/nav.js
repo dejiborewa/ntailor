@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 const Container = styled.div`
   background: var(--color-darkBg);
@@ -8,8 +9,8 @@ const Container = styled.div`
 
 const Title = styled.h3`
   color: var(--color-text-grey);
-  margin: 0 0 0 .5em;
-  padding: .5em;
+  margin: 0 0 0 0.5em;
+  padding: 0.5em;
 
   @media (min-width: 768px) {
     font-size: 22px;
@@ -24,9 +25,11 @@ const Span = styled.span`
 const Nav = () => {
   return (
     <Container>
-      <Title>
-        Neighbor<Span>Tailor</Span>
-      </Title>
+      <Link to="/" style={{ textDecoration: "none" }}>
+        <Title>
+          Neighbor<Span>Tailor</Span>
+        </Title>
+      </Link>
     </Container>
   );
 };

@@ -1,11 +1,24 @@
 import React from "react";
 import styled from "styled-components";
+import back from "./assets/backAndTotal/back.png";
 import { Link } from "react-router-dom";
 
 const Container = styled.div`
   color: var(--color-text-secondary);
 
   &.back {
+    display: flex;
+    background: var(--color-darkBg);
+    align-items: center;
+    padding: 0.5em 0.7em;
+    border-radius: 37px;
+
+    &:hover {
+      background: black;
+    }
+  }
+
+  &.backAndTotal {
     display: flex;
     justify-content: space-between;
     padding: 1em 0;
@@ -14,18 +27,22 @@ const Container = styled.div`
 `;
 
 const Button = styled.button`
-  background: var(--color-darkBg);
   border: 0;
-  outline: none;
-  border-radius: 37px;
+  background: inherit;
   color: white;
-  padding: 0.6em 1.4em;
+  outline: none;
   cursor: pointer;
 `;
 
-const BackButton = () => {
+const Image = styled.img`
+  width: 0.9em;
+  height: 0.9em;
+`;
+
+export const BackButton = () => {
   return (
-    <Container>
+    <Container className="back">
+      <Image src={back} />
       <Button>Back</Button>
     </Container>
   );
@@ -33,9 +50,9 @@ const BackButton = () => {
 
 const BackAndTotal = (props) => {
   return (
-    <Container className="back">
-      <Link to={`.${props.location}`}>
-        <BackButton>Back</BackButton>
+    <Container className="backAndTotal">
+      <Link to={`.${props.location}`} style={{ textDecoration: "none" }}>
+        <BackButton />
       </Link>
       <Container>TOTAL: $45.00</Container>
     </Container>

@@ -5,7 +5,7 @@ import BackAndTotal from "../components/backAndTotal";
 import Footer from "../components/footer";
 import add from "./assets/upload/add.png";
 import { Text } from "./store";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 const Container = styled.div`
   &.wrapper {
@@ -118,7 +118,19 @@ const TextArea = styled.textarea`
   padding: 1em;
 `;
 
+const Span = styled.span`
+  display: block;
+  margin: 0.5em 0;
+  font-weight: 500;
+  font-style: italic;
+`;
+
 const Upload = () => {
+  let history = useHistory();
+
+  function handleClick() {
+    history.push("/form");
+  }
   return (
     <>
       <Nav />
@@ -126,7 +138,13 @@ const Upload = () => {
         <Container className="wrapper">
           <BackAndTotal location="/store" />
           <Container>
-            <Text style={{ marginTop: 0 }}>UPLOAD DESIGN INSPIRATION</Text>
+            <Text style={{ marginTop: 0 }}>
+              UPLOAD DESIGN INSPIRATION
+              <Span>
+                **This is not a required field, although we strongly recommend
+                you send us design inspirations.
+              </Span>
+            </Text>
             <UploadContainer>
               <Container className="upload">
                 <Container className="upload_logo">
@@ -153,8 +171,12 @@ const Upload = () => {
             </Container>
           </Container>
         </Container>
-        <Link to="/form" style={{ textDecoration: "none" }}>
-          <Footer text="UPLOAD" />
+        <Link
+          to="/form"
+          style={{ textDecoration: "none" }}
+          onClick={handleClick}
+        >
+          <Footer text="NEXT" />
         </Link>
       </Container>
     </>

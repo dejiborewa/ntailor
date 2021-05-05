@@ -24,6 +24,10 @@ const Button = styled.button`
   padding: 1em;
   outline: none;
   border: none;
+
+  &:hover {
+    background: #1aa1ed;
+  }
 `;
 
 const Footer = (props) => {

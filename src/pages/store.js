@@ -4,9 +4,9 @@ import styled from "styled-components";
 
 // Components
 import Nav from "../components/nav";
-import Footer from "../components/footer";
-import DisplayStyle from "../components/displayStyle";
 import BackAndTotal from "../components/backAndTotal";
+import DisplayStyle from "../components/displayStyle";
+import Footer from "../components/footer";
 import Section from "../components/section";
 
 // Assets
@@ -20,9 +20,10 @@ import awolowo from "../components/assets/displayStyle/awolowo.png";
 import gobi from "../components/assets/displayStyle/gobi.png";
 
 // Recat router DOM
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 // Data
+const guestList = ["Male Guest"];
 const image_path = [buba, fila];
 
 const styleData = [
@@ -80,6 +81,7 @@ const Container = styled.div`
 
   &.image_fabric_inner {
     margin-right: 0.5em;
+    position: relative;
   }
 
   &.wrapper {
@@ -95,6 +97,13 @@ const Container = styled.div`
     display: none;
   }
 
+  #blue-tick {
+    display: none;
+    position: absolute;
+    top: 65%;
+    left: 70%;
+  }
+
   @media (min-width: 768px) {
     font-size: 22px;
   }
@@ -102,19 +111,20 @@ const Container = styled.div`
   @media (min-width: 1024px) {
     &.main {
       display: flex;
-      height: 90vh;
     }
 
     &.left {
       display: block;
       width: 20%;
       background: var(--color-stylesBg);
+      position: sticky;
+      -webkit-position: sticky;
+      top: 0;
       height: 100vh;
     }
 
     &.right {
       width: 80%;
-      overflow-y: scroll;
     }
   }
 `;
@@ -123,18 +133,6 @@ export const Text = styled.h4`
   font-weight: lighter;
   margin: 0.8em 0;
   color: var(--color-text-secondary);
-`;
-
-const Input = styled.input`
-  border: 1px solid #38aced;
-  border-radius: 10px;
-  padding: 1em 0.5em;
-  width: 100%;
-  font-weight: bolder;
-
-  @media (min-width: 1024px) {
-    width: 60%;
-  }
 `;
 
 const Image = styled.img`
@@ -178,47 +176,80 @@ const Anchor = styled.a`
   color: inherit;
 `;
 
+const Select = styled.select`
+  width: 100%;
+  padding: 1em 0.5em;
+  border: 1px solid var(--color-footerBg);
+  border-radius: 10px;
+  font-weight: bold;
+  color: var(--color-text-secondary);
+  outline: none;
+  font-family: inherit;
+
+  &:focus {
+    border: 2px solid var(--color-footerBg);
+  }
+
+  @media (min-width: 1024px) {
+    width: 60%;
+  }
+`;
+
+const Option = styled.option`
+  font-family: inherit;
+`;
+
+const Dropdown = () => {
+  return (
+    <Container>
+      <Select name="guest-sex">
+        {guestList.map((guest, index) => {
+          return <Option key={index}>{guest}</Option>;
+        })}
+      </Select>
+    </Container>
+  );
+};
+
 const Store = () => {
   const [width, setWidth] = useState(
+    // Track browser width
     document.documentElement.clientWidth || window.innerWidth
   );
 
   useEffect(() => {
     const checkSize = () => {
+      // Re-render UI, when width changes
       setWidth(document.documentElement.clientWidth || window.innerWidth);
     };
     window.addEventListener("resize", checkSize);
-  }, []);
+    return () => {
+      window.removeEventListener("resize", checkSize);
+    };
+  }, [width]);
 
   useEffect(() => {
-    const listItems = document.getElementsByClassName("list_links");
-    listItems[0].classList.add("focus");
+    document.getElementsByClassName("list-item")[0].classList.add("focus");
   }, []);
 
-  /*const handleClick = () => {
-    const listItems = document.getElementsByClassName("list_links");
-    document.getElementById("list_links").addEventListener("click", (event) => {
-      event.preventDefault();
-      for (let i = 0; i < listItems.length; i++) {
-        listItems[i].classList.remove("focus");
-      }
-      event.target.classList.add("focus");
-    });
-  }  
-  */
+  let history = useHistory();
+
+  function handleClick() {
+    history.push("/upload");
+  }
 
   return (
     <Container>
       <Nav />
       <Container className="main">
         <Container className="left">
-          <List id="list_links">
+          <List id="list">
             {list.map((listItems, index) => {
               return (
                 <ListItems
                   href="#fabric_wrapper"
                   key={index}
-                  className="list_links"
+                  className="list-item"
                 >
                   <Anchor href={`#${listItems.link}`}>{listItems.title}</Anchor>
                 </ListItems>
@@ -235,21 +266,39 @@ const Store = () => {
               ) : (
                 <Text>AVAILABLE GROUP</Text>
               )}
-              <Input type="text" placeholder="Male Guest" />
+              <Dropdown />
             </Container>
             <Container id="fabric_wrapper">
               {width >= 1024 ? <Section title="SHOP FABRIC" /> : <></>}
               <Text>CHOOSE A FABRIC</Text>
               <Container className="image_fabric" id="fabric">
-                <>
-                  {image_path.map((image, index) => {
-                    return (
-                      <Container key={index} className="image_fabric_inner">
-                        <Image src={image} loading="eager" />
-                      </Container>
-                    );
-                  })}
-                </>
+                {image_path.map((image, index) => {
+                  return (
+                    <Container key={index} className="image_fabric_inner">
+                      <Image src={image} loading="eager" />
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 80 80"
+                        width="40px"
+                        height="40px"
+                        id="blue-tick"
+                      >
+                        <path
+                          fill="#8bb7f0"
+                          d="M8,75.5c-1.9,0-3.5-1.6-3.5-3.5V8c0-1.9,1.6-3.5,3.5-3.5h64c1.9,0,3.5,1.6,3.5,3.5v64 c0,1.9-1.6,3.5-3.5,3.5H8z"
+                        />
+                        <path
+                          fill="#4e7ab5"
+                          d="M72,5c1.7,0,3,1.3,3,3v64c0,1.7-1.3,3-3,3H8c-1.7,0-3-1.3-3-3V8c0-1.7,1.3-3,3-3H72 M72,4H8 C5.8,4,4,5.8,4,8v64c0,2.2,1.8,4,4,4h64c2.2,0,4-1.8,4-4V8C76,5.8,74.2,4,72,4L72,4z"
+                        />
+                        <path
+                          fill="#fff"
+                          d="M33.9 56.3L19.9 42.2 24.1 38 33.9 47.8 58.6 23.1 62.9 27.3z"
+                        />
+                      </svg>
+                    </Container>
+                  );
+                })}
               </Container>
             </Container>
             <Container id="outfit_wrapper">
@@ -274,7 +323,11 @@ const Store = () => {
               </Container>
             </Container>
           </Container>
-          <Link to="/upload" style={{ textDecoration: "none" }}>
+          <Link
+            to="/upload"
+            style={{ textDecoration: "none" }}
+            onClick={handleClick}
+          >
             <Footer text="NEXT" />
           </Link>
         </Container>

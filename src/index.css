@@ -1,5 +1,5 @@
 body {
-  margin: 0;
+  margin: 0 0 1.5em 0;
   font-family: var(--font-body);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -18,14 +18,13 @@ code {
   --color-text-grey: #7a8387;
   --color-text-light: #ffffff;
   --color-text: #232f34;
-  --color-text-secondary: #50576A;
+  --color-text-secondary: #50576a;
   --color-darkBg: #232f34;
   --color-lightBg: rgba(242, 243, 248, 0.9);
-  --color-lightBg2: #F7FAFF;
-  --color-border: #EAEDF5;
-  --color-footerBg: #38ACED;
-  --color-stylesBg: #F2F3F8;
-  --font-body: "Noto Sans JP", sans-serif;
-  --font-header: 'Merriweather', serif;
+  --color-lightBg2: #f7faff;
+  --color-border: #eaedf5;
+  --color-footerBg: #38aced;
+  --color-stylesBg: #f2f3f8;
+  --font-header: "Merriweather", serif;
+  --font-body: "Karla", sans-serif;
 }
-

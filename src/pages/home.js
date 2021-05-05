@@ -4,7 +4,7 @@ import Nav from "../components/nav";
 import Footer from "../components/footer";
 import couples_wide from "./assets/home/couples_wide.jpeg";
 import couples_narrow from "./assets/home/couples_narrow.jpg";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 const Container = styled.div`
   &.event-type {
@@ -107,6 +107,12 @@ const ImageContainer = styled(Container)`
 `;
 
 const Home = () => {
+  let history = useHistory();
+
+  function handleClick() {
+    history.push("/store");
+  }
+
   return (
     <Container>
       <Nav />
@@ -148,7 +154,7 @@ const Home = () => {
           and gracing us with your presence. #HappilyEverAyansola.
         </Text>
       </Container>
-      <Link to="/store" style={{ textDecoration: "none" }}>
+      <Link to="/store" style={{ textDecoration: "none" }} onClick={handleClick}>
         <Footer text="GO TO STORE" />
       </Link>
     </Container>
