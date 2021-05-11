@@ -19,6 +19,10 @@ const Container = styled.div`
     cursor: pointer;
   }
 
+  &.selected {
+    border: 5px solid var(--color-footerBg);
+  }
+
   &.style_content {
     position: absolute;
     top: 50%;
@@ -57,18 +61,38 @@ const DisplayStyle = (props) => {
     });
   });
 
+  const updateState = (e) => {
+    updateUIDisplayStyle(e); 
+    props.click(e, props.id);
+  };
+
+  const updateUIDisplayStyle = (e) => {
+    const elements = Array.from(document.getElementsByClassName(`${props.id}`));
+    elements.forEach((element) => {
+      if (element.classList.contains("selected")) {
+        element.classList.remove("selected");
+      }
+    });
+    e.currentTarget.classList.add("selected");
+  };
+
   return (
     <>
       <Container className="style_wrapper" id={props.id}>
         {props.array.map((item, index) => {
           return (
-            <Container className="style" key={index}>
+            <Container
+              className={`style ${props.id}`}
+              key={index}
+              name={item.name}
+              onClick={(e) => updateState(e)}
+            >
               <Container className="style_content">
                 <Container className="image">
                   <Image src={item.style} loading="eager" />
                 </Container>
                 <Container className="text">
-                  <Text>{item.name}</Text>
+                  <Text>{item.text}</Text>
                 </Container>
               </Container>
             </Container>

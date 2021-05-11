@@ -79,7 +79,7 @@ const Price = styled(Text)`
   color: ${(props) => (props.total ? "white" : "var(--color-footerBg)")};
 `;
 
-const TextEnd = styled(Price)`
+export const TextEnd = styled(Price)`
   font-weight: 500;
   margin: 1em 0;
 `;

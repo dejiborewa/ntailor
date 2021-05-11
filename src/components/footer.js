@@ -32,8 +32,8 @@ const Button = styled.button`
 
 const Footer = (props) => {
   return (
-    <Container>
-      <Button>{props.text}</Button>
+    <Container onClick={props.click}>
+      <Button id="submit-button">{props.text}</Button>
     </Container>
   );
 };

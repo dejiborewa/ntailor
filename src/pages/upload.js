@@ -44,6 +44,13 @@ const Container = styled.div`
     text-align: center;
   }
 
+  &.upload_action {
+    position: absolute;
+    top: 30%;
+    opacity: 0;
+    width: 100%;
+  }
+
   &.requests {
     margin: 1.5em 0;
   }
@@ -125,6 +132,9 @@ const Span = styled.span`
   font-style: italic;
 `;
 
+const Label = styled.label``;
+const Input = styled.input``;
+
 const Upload = () => {
   let history = useHistory();
 
@@ -142,7 +152,8 @@ const Upload = () => {
               UPLOAD DESIGN INSPIRATION
               <Span>
                 **This is not a required field, although we strongly recommend
-                you send us design inspirations.
+                you send us design inspir
+                ations.
               </Span>
             </Text>
             <UploadContainer>
@@ -152,6 +163,14 @@ const Upload = () => {
                     <Container className="add_image_container">
                       <Image src={add} alt="add_image" />
                     </Container>
+                  </Container>
+                  <Container className="upload_action">
+                    <Label htmlFor="upload"></Label>
+                    <Input
+                      type="file"
+                      id="upload"
+                      accept="image/png, image/jpeg"
+                    />
                   </Container>
                 </Container>
                 <Container className="upload_text">

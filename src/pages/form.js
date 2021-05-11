@@ -2,14 +2,16 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import Nav from "../components/nav";
 import BackAndTotal from "../components/backAndTotal";
-import FormMobile from "../components/formMobile";
-import FormDesktop from "../components/formDesktop";
+import FormBubaMobile from "../components/formBubaMobile";
+import FormBubaDesktop from "../components/formBubaDesktop";
+import FormSokotoMobile from "../components/formSokotoMobile";
+import FormSokotoDesktop from "../components/formSokotoDesktop";
 import { Text } from "./store";
 import Up from "./assets/form/up-arrow.png";
 import Down from "./assets/form/down-arrow.png";
 import { Link, useHistory } from "react-router-dom";
 
-const measuring_unit = ["INCHES", "CM"];
+const measuring_unit = ["INCHES"];
 
 const Container = styled.div`
   &.wrapper {
@@ -33,6 +35,10 @@ const Container = styled.div`
     width: auto;
     margin-left: -1em;
     margin-right: -1em;
+  }
+
+  &.head {
+    margin: 0.3em 0;
   }
 
   @media (min-width: 768px) {
@@ -167,8 +173,10 @@ const Dropdown = () => {
 };
 
 const Form = () => {
-  const [closeFormBuba, setcloseFormBuba] = useState(false);
-  const [closeFormFila, setcloseFormFila] = useState(false);
+  const [closeFormBuba, setCloseFormBuba] = useState(false);
+  const [closeFormSokoto, setCloseFormSokoto] = useState(false);
+  const [closeFormFila, setCloseFormFila] = useState(false);
+
   const [width, setWidth] = useState(
     document.documentElement.clientWidth || window.innerWidth
   );
@@ -186,11 +194,19 @@ const Form = () => {
 
   useEffect(() => {
     if (closeFormBuba === true) {
-      document.getElementById("form-container").style.display = "none";
+      document.getElementById("form-container-buba").style.display = "none";
     } else if (closeFormBuba === false) {
-      document.getElementById("form-container").style.display = "block";
+      document.getElementById("form-container-buba").style.display = "block";
     }
   }, [closeFormBuba]);
+
+  useEffect(() => {
+    if (closeFormSokoto === true) {
+      document.getElementById("form-container-sokoto").style.display = "none";
+    } else if (closeFormSokoto === false) {
+      document.getElementById("form-container-sokoto").style.display = "block";
+    }
+  }, [closeFormSokoto]);
 
   useEffect(() => {
     if (closeFormFila === true) {
@@ -206,6 +222,10 @@ const Form = () => {
     history.push("/checkout");
   }
 
+  function goToMeasurements() {
+    history.push("/measurements");
+  }
+
   return (
     <Container>
       <Nav />
@@ -214,27 +234,50 @@ const Form = () => {
         <Text>GET MEASURED</Text>
         <Container className="buttons">
           <Dropdown />
-          <Button measurement>Download Measurement guide</Button>
+          <Button onClick={goToMeasurements} measurement>
+            Download Measurement guide
+          </Button>
         </Container>
         <FormContainer>
           <Container className="form">
             <HeadingContainer>
-              <Heading>BUBA AND SOKOTO</Heading>
-              <Icon onClick={() => setcloseFormBuba(!closeFormBuba)}>
-                {closeFormBuba ? <Image src={Down} /> : <Image src={Up} />}
+              <Heading>BUBA/TOP</Heading>
+              <Icon onClick={() => setCloseFormBuba(!closeFormBuba)}>
+                {closeFormBuba ? (
+                  <Image src={Down} alt="close-form" />
+                ) : (
+                  <Image src={Up} alt="open-form" />
+                )}
               </Icon>
             </HeadingContainer>
-            {width >= 768 ? <FormDesktop /> : <FormMobile />}
+            {width >= 768 ? <FormBubaDesktop /> : <FormBubaMobile />}
+          </Container>
+          <Container className="form">
+            <HeadingContainer>
+              <Heading>SOKOTO/TROUSER</Heading>
+              <Icon onClick={() => setCloseFormSokoto(!closeFormSokoto)}>
+                {closeFormSokoto ? (
+                  <Image src={Down} alt="close-form" />
+                ) : (
+                  <Image src={Up} alt="open-form" />
+                )}
+              </Icon>
+            </HeadingContainer>
+            {width >= 768 ? <FormSokotoDesktop /> : <FormSokotoMobile />}
           </Container>
           <Container className="form">
             <HeadingContainer>
               <Heading>FILA/CAP</Heading>
-              <Icon onClick={() => setcloseFormFila(!closeFormFila)}>
-                {closeFormFila ? <Image src={Down} /> : <Image src={Up} />}
+              <Icon onClick={() => setCloseFormFila(!closeFormFila)}>
+                {closeFormFila ? (
+                  <Image src={Down} alt="open-form" />
+                ) : (
+                  <Image src={Up} alt="open-form" />
+                )}
               </Icon>
             </HeadingContainer>
             <Container id="form-container-fila">
-              <Container>
+              <Container className="head">
                 <Label htmlFor="head">Head Width</Label>
                 <Input type="number" id="head" />
               </Container>

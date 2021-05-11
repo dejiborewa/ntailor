@@ -13,7 +13,7 @@ const Container = styled.div`
   }
 `;
 
-const Input = styled.input`
+export const Input = styled.input`
   display: block;
   border-radius: 10px;
   padding: 0.5em 0;
@@ -28,9 +28,9 @@ const Input = styled.input`
   }
 `;
 
-const FormDesktop = () => {
+const FormBubaDesktop = () => {
   return (
-    <Container id="form-container">
+    <Container id="form-container-buba">
       <Container className="form-container-wrapper">
         <Container>
           <Label htmlFor="neck">Neck</Label>
@@ -72,37 +72,10 @@ const FormDesktop = () => {
           <Label htmlFor="agbadaL">Agbada Length</Label>
           <Input type="number" id="agbadaL" required/>
         </Container>
-        <Container>
-          <Label htmlFor="waist">Waist</Label>
-          <Input type="number" id="waist" required/>
-        </Container>
-        <Container>
-          <Label htmlFor="thighs">Thighs</Label>
-          <Input type="number" id="thighs" required/>
-        </Container>
-        <Container>
-          <Label htmlFor="hip">Hip</Label>
-          <Input type="number" id="hip" required/>
-        </Container>
-        <Container>
-          <Label htmlFor="kneeR">Knee Relaxed</Label>
-          <Input type="number" id="kneeR" required/>
-        </Container>
-        <Container>
-          <Label htmlFor="kneeF">Knee Flexed</Label>
-          <Input type="number" id="kneeF" required/>
-        </Container>
-        <Container>
-          <Label htmlFor="ankle">Ankle</Label>
-          <Input type="number" id="ankle" required/>
-        </Container>
-        <Container>
-          <Label htmlFor="trouser">Trouser Length</Label>
-          <Input type="number" id="trouser" required/>
-        </Container>
       </Container>
     </Container>
+  
   );
 };
 
-export default FormDesktop;
+export default FormBubaDesktop;
