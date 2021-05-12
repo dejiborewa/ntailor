@@ -95,7 +95,7 @@ const Container = styled.div`
   color: var(--color-text-secondary);
 
   &.store {
-    padding-bottom: .2em;
+    padding-bottom: 0.2em;
   }
 
   &.header-wrapper {
@@ -395,6 +395,7 @@ const Store = () => {
   };
 
   useEffect(() => {
+    console.log("effects");
     // Check if all selections are true & enables submit button
     if (checkSelection()) {
       setEnableSubmit(!enableSubmit);
@@ -411,7 +412,6 @@ const Store = () => {
     // Store state data based on user selection
     const name = e.currentTarget.getAttribute("name");
     setSelection((prevState) => {
-      console.log(prevState.fabric);
       let currentState = {
         ...prevState,
         fabric: { ...prevState.fabric, [name]: !prevState.fabric[name] },
@@ -505,7 +505,7 @@ const Store = () => {
                         onClick={(e) => selectFabric(e)}
                         name={image.name}
                       >
-                        <Image src={image.path} loading="eager" />
+                        <Image src={image.path} loading={"eager"} />
                         <Container
                           className="blue-tick-container"
                           style={{

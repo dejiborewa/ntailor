@@ -60,7 +60,7 @@ const Measurements = () => {
       {guides.map((guide, index) => {
         return (
           <Container key={index}>
-            <Image src={guide} />
+            <Image src={guide} loading={"eager"}/>
           </Container>
         );
       })}

@@ -233,9 +233,9 @@ const Form = () => {
         <Text>GET MEASURED</Text>
         <Container className="buttons">
           <Dropdown />
-          <Link to="/measurements" target="_blank">
+          <a href="/measurements" target="_blank">
             <Button measurement>View Measurement guide</Button>
-          </Link>
+          </a>
         </Container>
         <FormContainer>
           <Container className="form">
