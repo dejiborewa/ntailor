@@ -9,7 +9,6 @@ import DisplayStyle from "../components/displayStyle";
 import Footer from "../components/footer";
 import Section from "../components/section";
 
-
 // Assets
 import couples from "./assets/home/couples_wide.jpeg";
 import asoEbi from "./assets/store/buba.jpeg";
@@ -22,7 +21,7 @@ import awolowo from "../components/assets/displayStyle/awolowo.png";
 import gobi from "../components/assets/displayStyle/gobi.png";
 
 // Recat router DOM
-import { useHistory } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 
 // Data
 const guestList = ["Male Guest"];
@@ -144,7 +143,6 @@ const Container = styled.div`
   @media (min-width: 1024px) {
     &.main {
       display: flex;
-      
     }
 
     &.header-wrapper {
@@ -288,12 +286,11 @@ const Dropdown = () => {
 };
 
 const Store = () => {
-  const [state, setState] = useState({
-    asoEbi: false,
-    fila: false,
-  });
-
   const [selection, setSelection] = useState({
+    fabric: {
+      asoEbi: false,
+      fila: false,
+    },
     styles: {
       agbada: false,
       bubaAndSokoto: false,
@@ -305,6 +302,8 @@ const Store = () => {
       gobi: false,
     },
   });
+
+  const [enableSubmit, setEnableSubmit] = useState(false);
 
   const changeState = (e, id) => {
     const name = e.currentTarget.getAttribute("name");
@@ -354,19 +353,9 @@ const Store = () => {
   }, [width]);
 
   useEffect(() => {
+    // Load UI with focus on the first Item of List
     document.getElementsByClassName("anchor")[0].classList.add("focus");
   }, []);
-
-  let history = useHistory();
-
-  function handleClick() {
-    if (checkFabricSelection() && checkSelection()) {
-      document.getElementById("submit-button").disabled = false;
-      history.push("/upload");
-    } else {
-      document.getElementById("submit-button").disabled = true;
-    }
-  }
 
   const updateUISideBar = (event) => {
     // Update UI as user navigates on the side bar
@@ -379,28 +368,35 @@ const Store = () => {
     event.target.classList.add("focus");
   };
 
+  useEffect(() => {
+    // Check if all selections are true & enables submit button
+    if (checkSelection()) {
+      setEnableSubmit(!enableSubmit);
+    }
+  }, [selection]);
+
+  let history = useHistory();
+
+  function handleClick() {
+    history.push("/upload");
+  }
+
   const selectFabric = (e) => {
     // Store state data based on user selection
     const name = e.currentTarget.getAttribute("name");
-    setState((prevState) => {
-      let currentState = { ...prevState, [name]: !prevState[name] };
+    setSelection((prevState) => {
+      console.log(prevState.fabric);
+      let currentState = {
+        ...prevState,
+        fabric: { ...prevState.fabric, [name]: !prevState.fabric[name] },
+      };
       return currentState;
     });
   };
 
-  const checkFabricSelection = () => {
-    const stateValues = Object.values(state);
-    const isTrue = (value) => {
-      if (value === true) {
-        return true;
-      } else {
-        return false;
-      }
-    };
-    return stateValues.some(isTrue);
-  };
-
   const checkSelection = () => {
+    // Check that at least one selection has been made in the form
+    const stateValues = Object.values(selection.fabric);
     const styleValues = Object.values(selection.styles);
     const capValues = Object.values(selection.caps);
     const isTrue = (value) => {
@@ -410,7 +406,11 @@ const Store = () => {
         return false;
       }
     };
-    return styleValues.some(isTrue) && capValues.some(isTrue);
+    return (
+      stateValues.some(isTrue) &&
+      styleValues.some(isTrue) &&
+      capValues.some(isTrue)
+    );
   };
 
   return (
@@ -483,7 +483,9 @@ const Store = () => {
                         <Container
                           className="blue-tick-container"
                           style={{
-                            display: state[image.name] ? "flex" : "none",
+                            display: selection.fabric[image.name]
+                              ? "flex"
+                              : "none",
                           }}
                         >
                           <svg
@@ -539,7 +541,12 @@ const Store = () => {
             </Container>
           </Container>
           <Container>
-            <Footer text="NEXT" click={handleClick} />
+            <Footer
+              text="NEXT"
+              enableSubmit={enableSubmit}
+              click={handleClick}
+              isSubmit={true}
+            />
           </Container>
         </Container>
       </Container>

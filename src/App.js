@@ -7,7 +7,9 @@ import Checkout from "./pages/checkout";
 import Contact from "./pages/contact";
 import Success from "./pages/success";
 import OrderCompleted from "./pages/orderCompleted";
+import Measurements from "./pages/measurements";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+
 
 
 const App = () => {
@@ -22,6 +24,7 @@ const App = () => {
         <Route path="/ordercompleted" component={OrderCompleted} />
         <Route path="/contact" component={Contact} />
         <Route path="/success" component={Success} />
+        <Route path="/measurements" component={Measurements} />
       </Switch>
     </Router>
   );

@@ -154,8 +154,12 @@ const Home = () => {
           and gracing us with your presence. #HappilyEverAyansola.
         </Text>
       </Container>
-      <Link to="/store" style={{ textDecoration: "none" }} onClick={handleClick}>
-        <Footer text="GO TO STORE" />
+      <Link
+        to="/store"
+        style={{ textDecoration: "none" }}
+        onClick={handleClick}
+      >
+        <Footer text="GO TO STORE" isSubmit={false} />
       </Link>
     </Container>
   );

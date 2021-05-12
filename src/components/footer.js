@@ -33,7 +33,13 @@ const Button = styled.button`
 const Footer = (props) => {
   return (
     <Container onClick={props.click}>
-      <Button id="submit-button">{props.text}</Button>
+      {props.isSubmit ? (
+        <Button disabled={props.enableSubmit ? false : true} id="submit-button">
+          {props.text}
+        </Button>
+      ) : (
+        <Button>{props.text}</Button>
+      )}
     </Container>
   );
 };

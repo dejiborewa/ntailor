@@ -111,7 +111,7 @@ const Option = styled.option``;
 const Button = styled.button`
   border-radius: 48px;
   border: 1px solid black;
-  padding: 0 0.5em;
+  padding: 0.5em;
   cursor: pointer;
 `;
 
@@ -222,10 +222,6 @@ const Form = () => {
     history.push("/checkout");
   }
 
-  function goToMeasurements() {
-    history.push("/measurements");
-  }
-
   return (
     <Container>
       <Nav />
@@ -234,9 +230,9 @@ const Form = () => {
         <Text>GET MEASURED</Text>
         <Container className="buttons">
           <Dropdown />
-          <Button onClick={goToMeasurements} measurement>
-            Download Measurement guide
-          </Button>
+          <Link to="/measurements" target="_blank">
+            <Button measurement>View Measurement guide</Button>
+          </Link>
         </Container>
         <FormContainer>
           <Container className="form">

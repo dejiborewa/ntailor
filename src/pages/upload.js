@@ -195,7 +195,7 @@ const Upload = () => {
           style={{ textDecoration: "none" }}
           onClick={handleClick}
         >
-          <Footer text="NEXT" />
+          <Footer text="NEXT" isSubmit={false}/>
         </Link>
       </Container>
     </>
