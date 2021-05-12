@@ -94,6 +94,10 @@ const list = [
 const Container = styled.div`
   color: var(--color-text-secondary);
 
+  &.store {
+    padding-bottom: .2em;
+  }
+
   &.header-wrapper {
     display: none;
   }
@@ -130,6 +134,10 @@ const Container = styled.div`
     top: 0;
   }
 
+  &.help {
+    display: none;
+  }
+
   @media (min-width: 452px) {
     .blue-tick-container {
       width: 10.3em;
@@ -138,6 +146,18 @@ const Container = styled.div`
 
   @media (min-width: 768px) {
     font-size: 22px;
+
+    &.footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      padding: 0 1em;
+    }
+
+    &.help {
+      display: block;
+    }
   }
 
   @media (min-width: 1024px) {
@@ -192,6 +212,12 @@ export const Text = styled.h4`
   font-weight: lighter;
   margin: 0.8em 0;
   color: var(--color-text-secondary);
+`;
+
+const Help = styled(Text)`
+  color: var(--color-footerBg);
+  font-weight: 400;
+  margin: 0;
 `;
 
 const Image = styled.img`
@@ -414,7 +440,7 @@ const Store = () => {
   };
 
   return (
-    <Container>
+    <Container className="store">
       <Nav />
       {width >= 1024 ? (
         <Container className="header-wrapper">
@@ -540,13 +566,21 @@ const Store = () => {
               </Container>
             </Container>
           </Container>
-          <Container>
-            <Footer
-              text="NEXT"
-              enableSubmit={enableSubmit}
-              click={handleClick}
-              isSubmit={true}
-            />
+          <Container className="footer">
+            <Container className="help">
+              <Link to="/contact" style={{ textDecoration: "none" }}>
+                <Help>NEED HELP?</Help>
+              </Link>
+            </Container>
+
+            <Container>
+              <Footer
+                text="NEXT"
+                enableSubmit={enableSubmit}
+                click={handleClick}
+                isSubmit={true}
+              />
+            </Container>
           </Container>
         </Container>
       </Container>
