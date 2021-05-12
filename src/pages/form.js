@@ -182,7 +182,7 @@ const Form = () => {
   );
 
   useEffect(() => {
-    // check width
+    // check browser width
     const changeForm = () => {
       setWidth(document.documentElement.clientWidth || window.innerWidth);
     };
@@ -193,6 +193,7 @@ const Form = () => {
   }, []);
 
   useEffect(() => {
+    //  Hides and reveals formBuba
     if (closeFormBuba === true) {
       document.getElementById("form-container-buba").style.display = "none";
     } else if (closeFormBuba === false) {
@@ -201,6 +202,7 @@ const Form = () => {
   }, [closeFormBuba]);
 
   useEffect(() => {
+    // Hides and reveals formSokoto
     if (closeFormSokoto === true) {
       document.getElementById("form-container-sokoto").style.display = "none";
     } else if (closeFormSokoto === false) {
@@ -209,6 +211,7 @@ const Form = () => {
   }, [closeFormSokoto]);
 
   useEffect(() => {
+    // Hides and Reveals formFila
     if (closeFormFila === true) {
       document.getElementById("form-container-fila").style.display = "none";
     } else if (closeFormFila === false) {
