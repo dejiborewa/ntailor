@@ -97,20 +97,12 @@ const Input = styled.input`
   }
 `;
 
-const Select = styled.select`
-  background: var(--color-footerBg);
-  border-radius: 48px;
-  color: white;
-  padding: 0.5em;
-  border: 0;
-`;
-
 const FormContainer = styled.form`
   @media (min-width: 768px) {
     padding-bottom: 1em;
   }
 `;
-const Option = styled.option``;
+
 const Button = styled.button`
   border-radius: 48px;
   border: 1px solid black;
