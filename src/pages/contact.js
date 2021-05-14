@@ -2,7 +2,6 @@ import React from "react";
 import styled from "styled-components";
 import Nav from "../components/nav";
 
-
 const Container = styled.div`
   &.main {
     margin-top: 3em;
@@ -83,14 +82,6 @@ const Button = styled.button`
   outline: 0;
 `;
 
-const SubmitButton = () => {
-  return (
-    <Container className="button-wrapper">
-      <Button type="submit">SEND</Button>{" "}
-    </Container>
-  );
-};
-
 const Contact = () => {
   return (
     <Container>
@@ -113,7 +104,9 @@ const Contact = () => {
             <Label htmlFor="message"></Label>
             <TextArea id="message" placeholder="Message" required></TextArea>
           </Container>
-          <SubmitButton text="SEND" />
+          <Container className="button-wrapper">
+            <Button type="submit">SEND</Button>
+          </Container>
         </FormContainer>
       </Container>
     </Container>

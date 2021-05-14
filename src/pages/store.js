@@ -6,7 +6,6 @@ import styled from "styled-components";
 import Nav from "../components/nav";
 import BackAndTotal from "../components/backAndTotal";
 import DisplayStyle from "../components/displayStyle";
-import Footer from "../components/footer";
 import Section from "../components/section";
 
 // Assets
@@ -94,10 +93,6 @@ const list = [
 const Container = styled.div`
   color: var(--color-text-secondary);
 
-  &.store {
-    padding-bottom: 0.2em;
-  }
-
   &.header-wrapper {
     display: none;
   }
@@ -113,7 +108,7 @@ const Container = styled.div`
 
   &.wrapper {
     padding: 0 1em;
-    margin: 0 0 0.5em;
+    margin: 0 0 1em;
   }
 
   &.guest {
@@ -134,8 +129,16 @@ const Container = styled.div`
     top: 0;
   }
 
+  &.footer {
+    display: block;
+  }
+
   &.help {
     display: none;
+  }
+
+  &.submit-button {
+    width: 100%;
   }
 
   @media (min-width: 452px) {
@@ -151,12 +154,17 @@ const Container = styled.div`
       display: flex;
       justify-content: space-between;
       align-items: center;
-      width: 100%;
-      padding: 0 1em;
+      width: 95%;
+      margin: 0 auto;
+      padding: 0.9em 0;
     }
 
     &.help {
       display: block;
+    }
+
+    &.submit-button {
+      width: auto;
     }
   }
 
@@ -299,6 +307,22 @@ const ImageHeader = styled.img`
   border-radius: 50%;
 `;
 
+const Button = styled.button`
+  width: 100%;
+  padding: 2em;
+  color: white;
+  background: var(--color-footerBg);
+  border: 0;
+  outline: 0;
+  cursor: pointer;
+
+  @media (min-width: 768px) {
+    width: auto;
+    padding: 1em 2.5em;
+    border-radius: 10px;
+  }
+`;
+
 const Dropdown = () => {
   return (
     <Container>
@@ -395,7 +419,6 @@ const Store = () => {
   };
 
   useEffect(() => {
-    console.log("effects");
     // Check if all selections are true & enables submit button
     if (checkSelection()) {
       setEnableSubmit(!enableSubmit);
@@ -573,13 +596,14 @@ const Store = () => {
               </Link>
             </Container>
 
-            <Container>
-              <Footer
-                text="NEXT"
-                enableSubmit={enableSubmit}
-                click={handleClick}
-                isSubmit={true}
-              />
+            <Container className="submit-button">
+              <Button
+                disabled={enableSubmit ? false : true}
+                id="submit-button"
+                onClick={handleClick}
+              >
+                NEXT
+              </Button>
             </Container>
           </Container>
         </Container>

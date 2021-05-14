@@ -159,7 +159,7 @@ const Home = () => {
         style={{ textDecoration: "none" }}
         onClick={handleClick}
       >
-        <Footer text="GO TO STORE" isSubmit={false} />
+        <Footer text="GO TO STORE" />
       </Link>
     </Container>
   );

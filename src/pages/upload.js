@@ -141,6 +141,7 @@ const Upload = () => {
   function handleClick() {
     history.push("/form");
   }
+  
   return (
     <>
       <Nav />
@@ -152,8 +153,7 @@ const Upload = () => {
               UPLOAD DESIGN INSPIRATION
               <Span>
                 **This is not a required field, although we strongly recommend
-                you send us design inspir
-                ations.
+                you send us design inspir ations.
               </Span>
             </Text>
             <UploadContainer>
@@ -195,7 +195,7 @@ const Upload = () => {
           style={{ textDecoration: "none" }}
           onClick={handleClick}
         >
-          <Footer text="NEXT" isSubmit={false}/>
+          <Footer text="NEXT" />
         </Link>
       </Container>
     </>

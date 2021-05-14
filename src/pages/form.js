@@ -11,8 +11,6 @@ import Up from "./assets/form/up-arrow.png";
 import Down from "./assets/form/down-arrow.png";
 import { Link, useHistory } from "react-router-dom";
 
-const measuring_unit = ["INCHES"];
-
 const Container = styled.div`
   &.wrapper {
     margin: 0 1em;
@@ -21,6 +19,7 @@ const Container = styled.div`
   &.buttons {
     display: flex;
     justify-content: space-between;
+    align-items: center;
   }
 
   &.form {
@@ -106,7 +105,11 @@ const Select = styled.select`
   border: 0;
 `;
 
-const FormContainer = styled.form``;
+const FormContainer = styled.form`
+  @media (min-width: 768px) {
+    padding-bottom: 1em;
+  }
+`;
 const Option = styled.option``;
 const Button = styled.button`
   border-radius: 48px;
@@ -140,7 +143,7 @@ const Image = styled.img`
   margin: 0 auto;
 `;
 
-const Submit = styled.button`
+const SubmitButton = styled.button`
   width: 100%;
   padding: 2em 0;
   color: white;
@@ -148,29 +151,18 @@ const Submit = styled.button`
   outline: 0;
   border: 0;
   cursor: pointer;
-  border-radius: 10px;
 
   @media (min-width: 768px) {
     padding: 1em 2em;
     width: 10em;
+    border-radius: 10px;
   }
 `;
 
-const SubmitButton = () => {
-  return <Submit>SUBMIT</Submit>;
-};
-
-const Dropdown = () => {
-  return (
-    <Container>
-      <Select name="measuring-unit">
-        {measuring_unit.map((unit, index) => {
-          return <Option key={index}>{unit}</Option>;
-        })}
-      </Select>
-    </Container>
-  );
-};
+const Span = styled.span`
+  font-weight: 300;
+  font-style: italic;
+`;
 
 const Form = () => {
   const [closeFormBuba, setCloseFormBuba] = useState(false);
@@ -221,9 +213,10 @@ const Form = () => {
 
   let history = useHistory();
 
-  function handleClick() {
+  const handleSubmit = (e) => {
+    e.preventDefault();
     history.push("/checkout");
-  }
+  };
 
   return (
     <Container>
@@ -232,15 +225,21 @@ const Form = () => {
         <BackAndTotal location="/upload" />
         <Text>GET MEASURED</Text>
         <Container className="buttons">
-          <Dropdown />
           <a href="/measurements" target="_blank">
             <Button measurement>View Measurement guide</Button>
           </a>
+          <Link to="/contact" style={{ textDecoration: "none" }}>
+            <Text style={{ color: "var(--color-footerBg)", fontWeight: "400" }}>
+              {width >= 768 ? "Need help getting measured?" : "Need Help?"}
+            </Text>
+          </Link>
         </Container>
-        <FormContainer>
+        <FormContainer id="entire-form" onSubmit={handleSubmit}>
           <Container className="form">
             <HeadingContainer>
-              <Heading>BUBA/TOP</Heading>
+              <Heading>
+                BUBA/TOP <Span>(inches)</Span>
+              </Heading>
               <Icon onClick={() => setCloseFormBuba(!closeFormBuba)}>
                 {closeFormBuba ? (
                   <Image src={Down} alt="close-form" />
@@ -253,7 +252,9 @@ const Form = () => {
           </Container>
           <Container className="form">
             <HeadingContainer>
-              <Heading>SOKOTO/TROUSER</Heading>
+              <Heading>
+                SOKOTO/TROUSER <Span>(inches)</Span>
+              </Heading>
               <Icon onClick={() => setCloseFormSokoto(!closeFormSokoto)}>
                 {closeFormSokoto ? (
                   <Image src={Down} alt="close-form" />
@@ -266,7 +267,9 @@ const Form = () => {
           </Container>
           <Container className="form">
             <HeadingContainer>
-              <Heading>FILA/CAP</Heading>
+              <Heading>
+                FILA/CAP <Span>(inches)</Span>
+              </Heading>
               <Icon onClick={() => setCloseFormFila(!closeFormFila)}>
                 {closeFormFila ? (
                   <Image src={Down} alt="open-form" />
@@ -282,11 +285,9 @@ const Form = () => {
               </Container>
             </Container>
           </Container>
-          <Link to="/checkout" style={{ textDecoration: "none" }}>
-            <Container className="button-wrapper">
-              <SubmitButton type="submit" onClick={handleClick} />
-            </Container>
-          </Link>
+          <Container className="button-wrapper">
+            <SubmitButton type="submit">SUBMIT</SubmitButton>
+          </Container>
         </FormContainer>
       </Container>
     </Container>
