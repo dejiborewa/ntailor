@@ -1,6 +1,12 @@
 import React from "react";
 import styled from "styled-components";
 import Nav from "../components/nav";
+import agbada from "../components/assets/displayStyle/agbada.png";
+import dansiki from "../components/assets/displayStyle/dansiki.png";
+import buba_style from "../components/assets/displayStyle/buba.png";
+import abetiAja from "../components/assets/displayStyle/abetiaja.png";
+import awolowo from "../components/assets/displayStyle/awolowo.png";
+import gobi from "../components/assets/displayStyle/gobi.png";
 import { BackButton } from "../components/backAndTotal";
 import { Link } from "react-router-dom";
 
@@ -44,6 +50,42 @@ const Container = styled.div`
     margin-top: 1em;
   }
 
+  &.powered {
+    margin-top: 1.1em;
+    display: flex;
+    justify-content: center;
+    color: var(--color-text);
+  }
+
+  &.preview {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1em;
+  }
+
+  &.preview-style,
+  &.preview-cap {
+    position: relative;
+    min-width: 10.3em;
+    min-height: 10.3em;
+    background: var(--color-lightBg2);
+    border: 2px solid #38aced;
+    box-sizing: border-box;
+    border-radius: 10px;
+  }
+
+  &.preview-cap {
+    margin-left: 1em;
+  }
+
+  &.preview-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
   @media (min-width: 768px) {
     &.main {
       margin: 0 3em;
@@ -57,6 +99,28 @@ const Container = styled.div`
     &.pay {
       margin: 2em 4em;
     }
+
+    &.preview {
+      justify-content: flex-start;
+      margin: 2em 0 2em 4em;
+    }
+
+    &.email-phone,
+    &.zip-city {
+      display: flex;
+    }
+
+    &.email,
+    &.phone,
+    &.zip,
+    &.city {
+      width: 50%;
+    }
+
+    &.phone,
+    .city {
+      margin-left: 1em;
+    }
   }
 
   @media (min-width: 1024px) {
@@ -67,6 +131,10 @@ const Container = styled.div`
     &.left,
     &.right {
       width: calc(100% / 2);
+    }
+
+    &.preview {
+      margin-bottom: 1em;
     }
   }
 `;
@@ -128,7 +196,21 @@ const Button = styled.button`
   outline: 0;
 `;
 
-const Checkout = () => {
+const Image = styled.img`
+  display: block;
+  margin-bottom: 0.5em;
+`;
+
+const Name = styled.h4`
+  display: block;
+  text-align: center;
+  font-weight: lighter;
+  color: #11163e;
+  margin: 0;
+`;
+
+const Checkout = (props) => {
+  const {selection} = props;
   return (
     <Container>
       <Nav />
@@ -136,6 +218,50 @@ const Checkout = () => {
         <Link to="/form" style={{ textDecoration: "none" }}>
           <BackButton />
         </Link>
+      </Container>
+      <Container className="preview">
+        <Container className="preview-style">
+          {(selection.styles.agbada === true && (
+            <Container className="preview-content">
+              <Image src={agbada} />
+              <Name>AGBADA</Name>
+            </Container>
+          )) ||
+            (selection.styles.bubaAndSokoto === true && (
+              <Container className="preview-content">
+                <Image src={buba_style} />
+                <Name>BUBA</Name>
+              </Container>
+            )) ||
+            (selection.styles.dansiki === true && (
+              <Container className="preview-content">
+                <Image src={dansiki} />
+                <Name>DANSIKI</Name>
+              </Container>
+            ))}
+        </Container>
+        {selection.fabric.fila === true && (
+          <Container className="preview-cap">
+            {(selection.caps.abetiAja === true && (
+              <Container className="preview-content">
+                <Image src={abetiAja} />
+                <Name>ABETI AJA</Name>
+              </Container>
+            )) ||
+              (selection.caps.awolowo === true && (
+                <Container className="preview-content">
+                  <Image src={awolowo} />
+                  <Name>AWOLOWO</Name>
+                </Container>
+              )) ||
+              (selection.caps.gobi === true && (
+                <Container className="preview-content">
+                  <Image src={gobi} />
+                  <Name>GOBI</Name>
+                </Container>
+              ))}
+          </Container>
+        )}
       </Container>
       <Container className="main">
         <Container className="left">
@@ -164,21 +290,49 @@ const Checkout = () => {
               <Heading>ENTER DELIVERY DETAILS</Heading>
               <Label htmlFor="name">Name</Label>
               <Input type="text" id="name" placeholder="Diran Adelekun" />
-              <Label htmlFor="email">Email address</Label>
-              <Input
-                type="email"
-                id="email"
-                placeholder="diranadelekun@gmail.com"
-              />
-              <Label htmlFor="phone">Phone number</Label>
-              <Input type="tel" id="phone" placeholder="+2348140564969" />
+              <Container className="email-phone">
+                <Container className="email">
+                  <Label htmlFor="email">Email address</Label>
+                  <Input
+                    type="email"
+                    id="email"
+                    placeholder="johndoe@gmail.com"
+                    required
+                  />
+                </Container>
+                <Container className="phone">
+                  <Label htmlFor="phone">Phone number</Label>
+                  <Input
+                    type="tel"
+                    id="phone"
+                    placeholder="123-456-7890"
+                    required
+                  />
+                </Container>
+              </Container>
               <Label htmlFor="address">Enter delivery address</Label>
               <Input
                 type="text"
                 id="address"
-                placeholder="5, Ikeja Road, Lagos."
+                placeholder="2304 Oak Street, Old Forge, New York"
                 required
               />
+              <Container className="zip-city">
+                <Container className="zip">
+                  <Label htmlFor="zip">Zip Code</Label>
+                  <Input
+                    type="text"
+                    id="zip"
+                    pattern="[0-9]{5}"
+                    placeholder="90013"
+                    required
+                  />
+                </Container>
+                <Container className="city">
+                  <Label htmlFor="city">City</Label>
+                  <Input type="text" id="city" placeholder="Alaska" required />
+                </Container>
+              </Container>
             </FormContainer>
           </Container>
           <Container className="pay">

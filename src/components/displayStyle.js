@@ -62,7 +62,7 @@ const DisplayStyle = (props) => {
   });
 
   const updateState = (e) => {
-    updateUIDisplayStyle(e); 
+    updateUIDisplayStyle(e);
     props.click(e, props.id);
   };
 

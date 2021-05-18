@@ -156,7 +156,9 @@ const Span = styled.span`
   font-style: italic;
 `;
 
-const Form = () => {
+const Form = (props) => {
+  const { selection } = props;
+  
   const [closeFormBuba, setCloseFormBuba] = useState(false);
   const [closeFormSokoto, setCloseFormSokoto] = useState(false);
   const [closeFormFila, setCloseFormFila] = useState(false);
@@ -240,7 +242,11 @@ const Form = () => {
                 )}
               </Icon>
             </HeadingContainer>
-            {width >= 768 ? <FormBubaDesktop /> : <FormBubaMobile />}
+            {width >= 768 ? (
+              <FormBubaDesktop selection={selection} />
+            ) : (
+              <FormBubaMobile selection={selection} />
+            )}
           </Container>
           <Container className="form">
             <HeadingContainer>

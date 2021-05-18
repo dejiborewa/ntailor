@@ -192,10 +192,6 @@ const Container = styled.div`
       width: 50%;
     }
 
-    &.header-right {
-      width: 7.5em;
-    }
-
     &.date {
       color: white !important;
     }
@@ -302,8 +298,8 @@ const Paragraph = styled.p`
 `;
 const ImageHeader = styled.img`
   display: block;
-  width: inherit;
-  height: 7em;
+  width: 7em;
+  height: 6em;
   border-radius: 50%;
 `;
 
@@ -335,25 +331,12 @@ const Dropdown = () => {
   );
 };
 
-const Store = () => {
-  const [selection, setSelection] = useState({
-    fabric: {
-      asoEbi: false,
-      fila: false,
-    },
-    styles: {
-      agbada: false,
-      bubaAndSokoto: false,
-      dansiki: false,
-    },
-    caps: {
-      abetiAja: false,
-      awolowo: false,
-      gobi: false,
-    },
-  });
+const Store = (props) => {
+  const { selection, setSelection } = props;
 
+  
   const [enableSubmit, setEnableSubmit] = useState(false);
+
 
   const changeState = (e, id) => {
     const name = e.currentTarget.getAttribute("name");
@@ -421,7 +404,7 @@ const Store = () => {
   useEffect(() => {
     // Check if all selections are true & enables submit button
     if (checkSelection()) {
-      setEnableSubmit(!enableSubmit);
+      setEnableSubmit(true);
     }
   }, [selection]);
 
@@ -478,7 +461,7 @@ const Store = () => {
               </Paragraph>
               <Container className="date"> Date: September 23, 2021 </Container>
             </Container>
-            <Container className="header-right">
+            <Container>
               <ImageHeader src={couples} alt="couples" />
             </Container>
           </Container>
