@@ -35,45 +35,45 @@ const FormBubaDesktop = (props) => {
       <Container className="form-container-wrapper">
         <Container>
           <Label htmlFor="neck">Neck</Label>
-          <Input type="number" id="neck" required />
+          <Input type="number" id="neck" step=".01" required />
         </Container>
         <Container>
           <Label htmlFor="shoulder">Shoulder/Back</Label>
-          <Input type="number" id="shoulder" required />
+          <Input type="number" id="shoulder" step=".01" required />
         </Container>
         <Container>
           <Label htmlFor="sleeve">Sleeve length</Label>
-          <Input type="number" id="sleeve" required />
+          <Input type="number" id="sleeve" step=".01" required />
         </Container>
         <Container>
           <Label htmlFor="arm-width-r">Arm width relaxed</Label>
-          <Input type="number" id="arm-width-r" required />
+          <Input type="number" id="arm-width-r" step=".01" required />
         </Container>
         <Container>
           <Label htmlFor="arm-widthF">Arm width flexed</Label>
-          <Input type="number" id="arm-widthF" required />
+          <Input type="number" id="arm-widthF" step=".01" required />
         </Container>
         <Container>
           <Label htmlFor="wrist">Wrist Width</Label>
-          <Input type="number" id="wrist" required />
+          <Input type="number" id="wrist" step=".01" required />
         </Container>
         <Container>
           <Label htmlFor="chest">Chest</Label>
-          <Input type="number" id="chest" required />
+          <Input type="number" id="chest" step=".01" required />
         </Container>
         <Container>
           <Label htmlFor="belly">Belly</Label>
-          <Input type="number" id="belly" required />
+          <Input type="number" id="belly" step=".01" required />
         </Container>
         {selection.styles.agbada && (
           <>
             <Container>
               <Label htmlFor="agbada">Agbada Sleeve</Label>
-              <Input type="number" id="agbada" required />
+              <Input type="number" id="agbada" step=".01" required />
             </Container>
             <Container>
               <Label htmlFor="agbadaL">Agbada Length</Label>
-              <Input type="number" id="agbadaL" required />
+              <Input type="number" id="agbadaL" step=".01" required />
             </Container>
           </>
         )}

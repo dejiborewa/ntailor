@@ -169,7 +169,8 @@ const Upload = () => {
                     <Input
                       type="file"
                       id="upload"
-                      accept="image/png, image/jpeg"
+                      accept="image/*"
+                      multiple
                     />
                   </Container>
                 </Container>
